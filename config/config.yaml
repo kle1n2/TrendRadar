@@ -15,8 +15,8 @@ app:
 # ===============================================================
 schedule:
   enabled: true
-  # preset: "custom"
-  preset: "morning_evening" 
+  preset: "custom"
+  # preset: "morning_evening" 
 
 # ===============================================================
 # 2. 数据源 - 热榜平台
