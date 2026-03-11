@@ -389,130 +389,59 @@ presets:
 #     其余时间走默认配置（静默采集）
 
 custom:
-  name: "自定义"
-  description: "完全自由定义时间段、日计划和周映射。"
-
-  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  # 默认配置
-  #
-  # 当前时刻不在任何时间段（积木块）内时，使用这组开关。
-  # 时间段中没有写的字段，也会回退到这里。
-  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  name: "早9晚3定时推送"
+  description: "每天早上9点和下午3点各推送一次"
+  
+  # 默认配置：其他时间只采集不推送
   default:
-    collect: true                  # 是否采集数据（爬取热榜 + RSS）
-    analyze: false                 # 是否执行 AI 分析
-    ai_mode: "current"            # AI 分析模式:
-                                   #   follow_report → 跟随 report_mode
-                                   #   daily         → 强制全天汇总
-                                   #   current       → 强制当前榜单
-                                   #   incremental   → 强制增量模式
-    push: false                    # 是否发送推送通知
-    report_mode: "current"         # 报告模式:
-                                   #   daily       → 当日所有新闻的汇总
-                                   #   current     → 当前在榜的新闻
-                                   #   incremental → 只推送新增内容
+    collect: true      # 全天都采集数据
+    analyze: false     # 默认不分析
+    push: false        # 默认不推送
+    report_mode: "daily"
     once:
-      analyze: true                # 该时间段内只分析一次（省 API）
-      push: true                   # 该时间段内只推送一次（省打扰）
-
-
-  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  # 第 1 步：定义积木块（时间段）
-  #
-  # 每个时间段有一个唯一的 key（如 deep_quiet），
-  # 以及 start / end 表示生效的时间范围。
-  #
-  # 只需要写「和 default 不同的字段」，其余自动继承 default。
-  # 例如 weekday_morning 没写 collect，就会继承 default 的 collect: true。
-  #
-  # 提示：如果 start > end（如 22:00 → 07:00），
-  #       系统会自动识别为跨越午夜的时间段。
-  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  periods:
-
-    deep_quiet:
-      name: "深夜静默"
-      start: "23:00"
-      end: "06:00"                 # 23:00 → 次日 06:00（跨日时间段）
-      collect: true                # 夜间继续采集数据
-      analyze: true                # 夜间可以跑 AI 分析（反正不推送）
-      push: false                  # 深夜不推送，避免打扰
-
-    weekday_morning:
-      name: "工作日早间"
-      start: "08:00"
-      end: "10:00"                 # 跨度 2h，留足触发裕量
-      push: true                   # 早上推送一次
-      report_mode: "incremental"   # 只推新增内容
-      # once 继承 default（push: true）→ 窗口内只推一次
-
-    weekend_morning:
-      name: "周末早间"
-      start: "10:00"
-      end: "12:00"                 # 跨度 2h
+      analyze: true
       push: true
-      report_mode: "daily"         # 周末看全天汇总
-      # once 继承 default（push: true）→ 窗口内只推一次
-
-    evening_summary:
-      name: "晚间汇总"
-      start: "19:00"
-      end: "21:00"
-      analyze: true                # 晚间做 AI 分析
-      ai_mode: "daily"             # AI 也分析全天内容
-      push: true                   # 晚间推送
-      report_mode: "daily"         # 当日全部新闻汇总
-      # once 继承 default（analyze: true, push: true）→ 只分析/推送一次
-
-
-  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  # 第 2 步：把积木块拼成日计划
-  #
-  # 把上面定义的时间段组合成一天的安排。
-  # 你可以定义多个日计划（如 workday 和 weekend），
-  # 然后在第 3 步的 week_map 中分配给不同的星期。
-  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  
+  # 定义两个时间段
+  periods:
+    morning_push:
+      name: "早间推送"
+      start: "08:00"    # 8:00 开始
+      end: "10:00"      # 10:00 结束（留2小时窗口期）
+      analyze: true     # 推送前做 AI 分析
+      ai_mode: "daily"  # 分析从0点到现在的所有内容
+      push: true        # 推送开关
+      report_mode: "daily"  # 推送今天累积的所有匹配新闻
+      once:
+        analyze: true   # 这个时间段内只分析一次
+        push: true      # 这个时间段内只推送一次
+    
+    afternoon_push:
+      name: "下午推送"
+      start: "14:00"    # 14:00 开始
+      end: "16:00"      # 16:00 结束（留2小时窗口期）
+      analyze: true     # 推送前做 AI 分析
+      ai_mode: "daily"  # 分析从0点到现在的所有内容
+      push: true        # 推送开关
+      report_mode: "daily"  # 推送今天累积的所有匹配新闻
+      once:
+        analyze: true   # 这个时间段内只分析一次
+        push: true      # 这个时间段内只推送一次
+  
+  # 日计划：工作日和周末都一样
   day_plans:
-    workday:                       # 工作日计划
-      periods: ["deep_quiet", "weekday_morning", "evening_summary"]
-    weekend:                       # 周末计划（用 weekend_morning 替换 weekday_morning）
-      periods: ["deep_quiet", "weekend_morning", "evening_summary"]
-
-
-  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  # 第 3 步：指定每天用哪个日计划
-  #
-  # 1=周一  2=周二  3=周三  4=周四  5=周五  6=周六  7=周日
-  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    all_day:
+      periods: ["morning_push", "afternoon_push"]
+  
+  # 周映射：每天都用同一个计划
   week_map:
-    1: "workday"                   # 周一 → 工作日计划
-    2: "workday"                   # 周二
-    3: "workday"                   # 周三
-    4: "workday"                   # 周四
-    5: "workday"                   # 周五
-    6: "weekend"                   # 周六 → 周末计划
-    7: "weekend"                   # 周日
-
-
-  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  # 冲突策略（一般不用改）
-  #
-  # 什么是「冲突」？
-  #   如果你的两个时间段有重叠（比如 A 是 08:00-12:00，B 是 10:00-14:00），
-  #   那么 10:00-12:00 这段时间就同时属于 A 和 B，产生了冲突。
-  #   此时程序需要知道：到底听谁的？
-  #
-  # 两种处理方式：
-  #
-  #   error_on_overlap（推荐）
-  #     直接报错，提醒你去修改配置。
-  #     适合大多数人 —— 时间段重叠通常是写错了，报错能及时发现。
-  #
-  #   last_wins
-  #     day_plans 的 periods 列表中，写在后面的优先。
-  #     比如 periods: ["A", "B"]，重叠时 B 生效。
-  #     适合场景：你想用一个大范围时间段打底，再用后面的小范围覆盖。
-  #
-  # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1: "all_day"  # 周一
+    2: "all_day"  # 周二
+    3: "all_day"  # 周三
+    4: "all_day"  # 周四
+    5: "all_day"  # 周五
+    6: "all_day"  # 周六
+    7: "all_day"  # 周日
+  
   overlap:
     policy: "error_on_overlap"
