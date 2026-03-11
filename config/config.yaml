@@ -58,8 +58,8 @@ platforms:
     # === 综合新闻媒体类 ===
     - id: "toutiao"
       name: "今日头条"
-    - id: "baidu"
-      name: "百度热搜"
+    # - id: "baidu"
+    #   name: "百度热搜"
     - id: "thepaper"
       name: "澎湃新闻"
     - id: "ifeng"
@@ -87,17 +87,15 @@ platforms:
     - id: "douban"
       name: "豆瓣"
     # === 科技类平台 ===
-    - id: "ithome"
-      name: "IT之家"
-    - id: "juejin"
-      name: "掘金"
-    - id: "nowcoder"
-      name: "牛客网"
-    - id: "sspai"
-      name: "少数派"
+    # - id: "ithome"
+    #   name: "IT之家"
+    # - id: "juejin"
+    #   name: "掘金"
+    # - id: "sspai"
+    #   name: "少数派"
     # === 其他/工具类 ===
-    - id: "chongbuluo"
-      name: "虫部落"
+    # - id: "chongbuluo"
+    #   name: "虫部落"
 
 
 
@@ -194,7 +192,7 @@ report:
 
   rank_threshold: 5                   # 排名高亮阈值
 
-  max_news_per_keyword: 5             # 每个关键词最大显示数量（0=不限制）
+  max_news_per_keyword: 3             # 每个关键词最大显示数量（0=不限制）
 
 
 # ===============================================================
