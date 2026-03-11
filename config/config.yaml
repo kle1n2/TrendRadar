@@ -53,55 +53,51 @@ schedule:
 #   - name: 显示名称（可自定义，修改后不影响运行）
 # ===============================================================
 platforms:
-  
-  # === 综合新闻媒体类 ===
-  - id: "toutiao"
-    name: "今日头条"
-  - id: "baidu"
-    name: "百度热搜"
-  - id: "thepaper"
-    name: "澎湃新闻"
-  - id: "ifeng"
-    name: "凤凰网"
-  - id: "zaobao"
-    name: "联合早报"
-  - id: "tencent-hot"
-    name: "腾讯新闻 综合早报"
-
-  # === 财经投资类 ===
-  - id: "wallstreetcn-hot"
-    name: "华尔街见闻 最热"
-  - id: "cls-hot"
-    name: "财联社热门"
-  - id: "gelonghui"
-    name: "格隆汇"
-
-  # === 社交/短视频/娱乐类 ===
-  - id: "weibo"
-    name: "微博"
-  - id: "douyin"
-    name: "抖音"
-  - id: "bilibili-hot-search"
-    name: "bilibili 热搜"
-  - id: "zhihu"
-    name: "知乎"
-  - id: "douban"
-    name: "豆瓣"
-
-  # === 科技类平台 ===
-  - id: "ithome"
-    name: "IT之家"
-  - id: "juejin"
-    name: "掘金"
-  - id: "nowcoder"
-    name: "牛客网"
-  - id: "sspai"
-    name: "少数派"
-
-
-  # === 其他/工具类 ===
-  - id: "chongbuluo"
-    name: "虫部落"
+  enabled: true                       # 是否启用热榜抓取（总开关）
+  sources:                            # 平台列表
+    # === 综合新闻媒体类 ===
+    - id: "toutiao"
+      name: "今日头条"
+    - id: "baidu"
+      name: "百度热搜"
+    - id: "thepaper"
+      name: "澎湃新闻"
+    - id: "ifeng"
+      name: "凤凰网"
+    - id: "zaobao"
+      name: "联合早报"
+    - id: "tencent-hot"
+      name: "腾讯新闻 综合早报"
+    # === 财经投资类 ===
+    - id: "wallstreetcn-hot"
+      name: "华尔街见闻 最热"
+    - id: "cls-hot"
+      name: "财联社热门"
+    - id: "gelonghui"
+      name: "格隆汇"
+    # === 社交/短视频/娱乐类 ===
+    - id: "weibo"
+      name: "微博"
+    - id: "douyin"
+      name: "抖音"
+    - id: "bilibili-hot-search"
+      name: "bilibili 热搜"
+    - id: "zhihu"
+      name: "知乎"
+    - id: "douban"
+      name: "豆瓣"
+    # === 科技类平台 ===
+    - id: "ithome"
+      name: "IT之家"
+    - id: "juejin"
+      name: "掘金"
+    - id: "nowcoder"
+      name: "牛客网"
+    - id: "sspai"
+      name: "少数派"
+    # === 其他/工具类 ===
+    - id: "chongbuluo"
+      name: "虫部落"
 
 
 
