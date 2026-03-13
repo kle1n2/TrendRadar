@@ -404,22 +404,10 @@ custom:
   
   # 定义两个时间段
   periods:
-    morning_push:
-      name: "早间推送"
-      start: "08:00"    # 8:00 开始
-      end: "10:00"      # 10:00 结束（留2小时窗口期）
-      analyze: true     # 推送前做 AI 分析
-      ai_mode: "daily"  # 分析从0点到现在的所有内容
-      push: true        # 推送开关
-      report_mode: "daily"  # 推送今天累积的所有匹配新闻
-      once:
-        analyze: true   # 这个时间段内只分析一次
-        push: true      # 这个时间段内只推送一次
-    
     afternoon_push:
       name: "下午推送"
-      start: "14:00"    # 14:00 开始
-      end: "16:00"      # 16:00 结束（留2小时窗口期）
+      start: "15:00"    # 15:00 开始
+      end: "16:00"      # 16:00 结束（留1小时窗口期）
       analyze: true     # 推送前做 AI 分析
       ai_mode: "daily"  # 分析从0点到现在的所有内容
       push: true        # 推送开关
@@ -431,7 +419,7 @@ custom:
   # 日计划：工作日和周末都一样
   day_plans:
     all_day:
-      periods: ["morning_push", "afternoon_push"]
+      periods: ["afternoon_push"]
   
   # 周映射：每天都用同一个计划
   week_map:
