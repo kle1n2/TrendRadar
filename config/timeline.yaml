@@ -407,7 +407,7 @@ custom:
     afternoon_push:
       name: "下午推送"
       start: "15:00"    # 15:00 开始
-      end: "16:00"      # 16:00 结束（留1小时窗口期）
+      end: "15:30"      # 16:00 结束（留1小时窗口期）
       analyze: true     # 推送前做 AI 分析
       ai_mode: "daily"  # 分析从0点到现在的所有内容
       push: true        # 推送开关
