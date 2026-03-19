@@ -389,8 +389,8 @@ presets:
 #     其余时间走默认配置（静默采集）
 
 custom:
-  name: "早9晚3定时推送"
-  description: "每天早上9点和下午3点各推送一次"
+  name: "晚上定时推送"
+  description: "晚上7到9点推送一次"
   
   # 默认配置：其他时间只采集不推送
   default:
@@ -406,8 +406,8 @@ custom:
   periods:
     afternoon_push:
       name: "晚上推送"
-      start: "19:00"    # 15:00 开始
-      end: "20:00"      # 16:00 结束（留1小时窗口期）
+      start: "19:00"    # 19:00 开始
+      end: "21:00"      # 21:00 结束（留2小时窗口期）
       analyze: true     # 推送前做 AI 分析
       ai_mode: "daily"  # 分析从0点到现在的所有内容
       push: true        # 推送开关
