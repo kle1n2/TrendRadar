@@ -170,8 +170,8 @@ storage:
 # 8. AI 模型配置（共享）
 # ===============================================================
 ai:
-  model: "deepseek/deepseek-chat"
-  api_key: "sk-64ee68f5caa44352a2941a76acaa5a7f"
+  model: 
+  api_key: 
   api_base: ""
   timeout: 120
   temperature: 1.0
@@ -183,7 +183,7 @@ ai:
 # 9. AI 分析功能
 # ===============================================================
 ai_analysis:
-  enabled: true
+  enabled: false
   language: "Chinese"
   prompt_file: "ai_analysis_prompt.txt"
   mode: "follow_report"
